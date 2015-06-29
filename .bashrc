@@ -73,7 +73,7 @@ e()
 
 function export-workspace() {
     export WORKSPACE="$(cdw >/dev/null; pwd)"
-    export NEBULA_HOME="$(\ls {"$(git rev-parse --show-toplevel 2>/dev/null)",${WORKSPACE}/wrapper}/gradlew 2>/dev/null | head -n 1 | xargs dirname 2>/dev/null | sed -e 's|/$||')"
+    export NEBULA_HOME="$(\ls {"$(git rev-parse --show-toplevel 2>/dev/null)",${WORKSPACE}/{,nebula/}wrapper}/gradlew 2>/dev/null | head -n 1 | xargs dirname 2>/dev/null | sed -e 's|/$||')"
 }
 
 function pd()
