@@ -94,17 +94,20 @@ function pp()
     done
 }
 
+function _ps1_root() {
+  echo "\u:$(id -gn)@\h:\w|$(git rev-parse --abbrev-ref HEAD)"
+}
+
 if [ "$TERM" = "screen" -o "$TERM" = "xterm" ]
 then
     function prompt-command() {
         export-workspace
-        local ps1_root="\u:$(id -gn)@\h:\w|$(git branch 2>/dev/null | grep "^\*" | cut -d " " -f 2)"
-        export PS1="${ps1_root}> \[\e]0;${ps1_root}\a\]"
+        export PS1="$(_ps1_root)> \[\e]0;$(_ps1_root)\a\]"
     }
 else
     function prompt-command() {
         export-workspace
-        export PS1="\u:$(id -gn)@\h:\w|$(git branch 2>/dev/null | grep "^\*" | cut -d " " -f 2)> "
+        export PS1="$(_ps1_root)> "
     }
 fi
 
