@@ -95,7 +95,7 @@ function pp()
 }
 
 function _ps1_root() {
-  echo "\u:$(id -gn)@\h:\w|$(git rev-parse --abbrev-ref HEAD)"
+  echo "\u:$(id -gn)@\h:\w|$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
 }
 
 if [ "$TERM" = "screen" -o "$TERM" = "xterm" ]
