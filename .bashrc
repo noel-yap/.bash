@@ -155,7 +155,7 @@ export EDITOR=vi
 export HISTCONTROL=ignoredups
 export HISTIGNORE="&"
 
-export JAVA_HOME=/opt/jdk1.7
+export JAVA_HOME=/opt/jdk1.8
 
 export PATH=~/bin:/usr/local/git/bin:${PATH}
 export PATH=${PATH}:${JAVA_HOME}/bin
