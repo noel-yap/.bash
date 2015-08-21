@@ -147,7 +147,7 @@ tgzip()
 ulimit -c unlimited
 
 # umask
-umask 0022
+umask 0027
 
 export CDPATH=.:~:~/proj
 
