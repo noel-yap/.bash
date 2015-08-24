@@ -1,7 +1,7 @@
 shopt -s globstar
 
 # aliases
-alias ls='ls -AbF'
+alias ls='ls --color -AbF'
 alias md='mkdir -p'
 alias rd='rm -rf'
 
