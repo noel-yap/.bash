@@ -1,7 +1,7 @@
 shopt -s globstar
 
 # aliases
-alias ls='ls --color -AbF'
+alias ls='ls --color --time-style='+%Y-%m-%dT%H:%M:%S' -AbF'
 alias md='mkdir -p'
 alias rd='rm -rf'
 
