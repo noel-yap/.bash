@@ -4,6 +4,7 @@ shopt -s globstar
 alias ls='ls --color --time-style='+%Y-%m-%dT%H:%M:%S' -AbF'
 alias md='mkdir -p'
 alias rd='rm -rf'
+alias shred='shred -n 255 -u -z'
 
 # functions
 function cdg()
