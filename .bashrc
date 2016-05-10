@@ -74,8 +74,9 @@ e()
 
 function export-workspace() {
     export WORKSPACE="$(cdw >/dev/null; pwd)"
+    export GRADLE_USER_HOME="${WORKSPACE}/.gradle"
     export M2_REPO="${WORKSPACE}/.m2"
-    export NEBULA_HOME="$(\ls {"$(git rev-parse --show-toplevel 2>/dev/null)",${WORKSPACE}/{,nebula/}wrapper}/gradlew 2>/dev/null | head -n 1 | xargs dirname 2>/dev/null | sed -e 's|/$||')"
+    export NEBULA_HOME="$(\ls -U {${WORKSPACE}/nebula/wrapper,$(git rev-parse --show-toplevel 2>/dev/null)}/gradlew 2>/dev/null | head -n 1 | xargs dirname 2>/dev/null | sed -e 's|/$||')"
 }
 
 function pd()
@@ -159,8 +160,11 @@ export HISTIGNORE="&"
 
 export JAVA_HOME=/opt/jdk1.8
 
+export NPM_HOME=${HOME}/.npm-packages
+
 export PATH=~/bin:/usr/local/git/bin:${PATH}
 export PATH=${PATH}:${JAVA_HOME}/bin
+export PATH=${PATH}:${NPM_HOME}/bin
 
 export PROMPT_COMMAND="prompt-command"
 export PS2="  "
