@@ -66,6 +66,23 @@ function export-workspace() {
     export GRADLE_USER_HOME="${WORKSPACE}/.gradle"
     export M2_REPO="${WORKSPACE}/.m2"
     export NEBULA_HOME="$(\ls -U {$(git rev-parse --show-toplevel 2>/dev/null),${WORKSPACE}/nebula/wrapper}/gradlew 2>/dev/null | head -n 1 | xargs dirname 2>/dev/null | sed -e 's|/$||')"
+
+    if [ "${NPM_HOME}" != "${WORKSPACE}/.npm-packages" ]
+    then
+        if [ "${NPM_HOME}" != '' ]
+        then
+            PATH=${PATH/:${NPM_HOME}\/bin/}
+            NODE_PATH=${NODE_PATH/:${NPM_HOME}\/lib\/node_modules/}
+        fi
+
+        export NPM_HOME="${WORKSPACE}/.npm-packages"
+
+        if [ -d "${NPM_HOME}" -a -r "${NPM_HOME}" ]
+        then
+            export PATH="${PATH}:${NPM_HOME}/bin"
+            export NODE_PATH="${NODE_PATH}:${NPM_HOME}/lib/node_modules"
+        fi
+    fi
 }
 
 function pd()
@@ -149,11 +166,8 @@ export HISTIGNORE="&"
 
 export JAVA_HOME=/opt/jdk1.8
 
-export NPM_HOME=${HOME}/.npm-packages
-
-export PATH=~/bin:/usr/local/git/bin:${PATH}
+export PATH=~/bin:${PATH}
 export PATH=${PATH}:${JAVA_HOME}/bin
-export PATH=${PATH}:${NPM_HOME}/bin
 
 export PROMPT_COMMAND="prompt-command"
 export PS2="  "
