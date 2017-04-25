@@ -42,17 +42,6 @@ function cdw()
     CDPATH=${OLDCDPATH}
 }
 
-create-family-workspace() {
-    if [[ "$1" == --type=* ]]
-    then
-        task="$2"
-    else
-        task="$1"
-    fi
-
-    ~/bin/create-family-workspace "$@" && cd "${task}/family"
-}
-
 create-workspace() {
     for v in "$@"
     do
