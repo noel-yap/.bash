@@ -1,4 +1,4 @@
-. .bash/uname/$(uname).sh
+. ~/.bash/uname/$(uname).sh
 
 # aliases
 alias md='mkdir -p'
