@@ -46,6 +46,9 @@ create-workspace() {
     for v in "$@"
     do
         case ${v} in
+            --pr=*)
+                pr=${v/--pr=/}
+                ;;
             --repo=*)
                 repo=${v/--repo=/}
                 ;;
@@ -53,7 +56,17 @@ create-workspace() {
     done
 
     ~/bin/create-workspace "$@"
-    cd "${!#}/${repo}"
+
+    case "${!#}" in
+        --*=*)
+            wd="${repo}.pr-${pr}"
+            ;;
+        *)
+            wd="${!#}"
+            ;;
+    esac
+
+    cd "${wd}/${repo}"
 }
 
 e()
@@ -72,15 +85,14 @@ function export-workspace() {
         if [ "${NPM_HOME}" != '' ]
         then
             PATH=${PATH/:${NPM_HOME}\/bin/}
-            NODE_PATH=${NODE_PATH/:${NPM_HOME}\/lib\/node_modules/}
         fi
 
         export NPM_HOME="${WORKSPACE}/.npm-packages"
+        export NODE_PATH="${NPM_HOME}/lib/node_modules"
 
         if [ -d "${NPM_HOME}" -a -r "${NPM_HOME}" ]
         then
             export PATH="${PATH}:${NPM_HOME}/bin"
-            export NODE_PATH="${NODE_PATH}:${NPM_HOME}/lib/node_modules"
         fi
     fi
 }
