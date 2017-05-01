@@ -1,7 +1,6 @@
-shopt -s globstar
+. .bash/uname/$(uname).sh
 
 # aliases
-alias ls='ls --color --time-style='+%Y-%m-%dT%H:%M:%S' -AbF'
 alias md='mkdir -p'
 alias rd='rm -rf'
 alias shred='shred -n 255 -u -z'
