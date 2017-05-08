@@ -75,6 +75,7 @@ e()
 
 function export-workspace() {
     export WORKSPACE="$(cdw >/dev/null; pwd)"
+    export HISTFILE="${WORKSPACE}/.bash_history"
     export GRADLE_USER_HOME="${WORKSPACE}/.gradle"
     export M2_REPO="${WORKSPACE}/.m2"
     export NEBULA_HOME="$(\ls -U {$(git rev-parse --show-toplevel 2>/dev/null),${WORKSPACE}/nebula/wrapper}/gradlew 2>/dev/null | head -n 1 | xargs dirname 2>/dev/null | sed -e 's|/$||')"
@@ -94,6 +95,8 @@ function export-workspace() {
             export PATH="${PATH}:${NPM_HOME}/bin"
         fi
     fi
+
+    history -a
 }
 
 function pd()
@@ -174,6 +177,8 @@ export EDITOR=vi
 
 export HISTCONTROL=ignoredups
 export HISTIGNORE="&"
+export HISTSIZE=256
+export HISTFILESIZE=65536
 
 export PATH=~/bin:${PATH}
 export PATH=${PATH}:${JAVA_HOME}/bin
