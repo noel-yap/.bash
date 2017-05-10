@@ -96,7 +96,12 @@ function export-workspace() {
         fi
     fi
 
-    history -a
+    if [ "$(history | tail -n 1 | awk '{ print $2 }')" = 'cd' ]
+    then
+        history -r ${HISTFILE}
+    else
+        history -a
+    fi
 }
 
 function pd()
