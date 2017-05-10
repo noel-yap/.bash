@@ -32,6 +32,8 @@ function cdw()
         else
             d=-
         fi
+    else
+    	  d=~
     fi
 
     popd
