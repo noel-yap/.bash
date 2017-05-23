@@ -83,28 +83,26 @@ e()
 
 function export-workspace() {
     export WORKSPACE="$(cdw >/dev/null; pwd)"
+
     export HISTFILE="${WORKSPACE}/.bash_history"
     export GRADLE_USER_HOME="${WORKSPACE}/.gradle"
     export M2_REPO="${WORKSPACE}/.m2"
     export NEBULA_HOME="$(\ls -U {$(git rev-parse --show-toplevel 2>/dev/null),${WORKSPACE}/nebula/wrapper}/gradlew 2>/dev/null | head -n 1 | xargs dirname 2>/dev/null | sed -e 's|/$||')"
 
-    if [ "${NPM_CONFIG_PREFIX}" != "${WORKSPACE}/.npm-packages" ]
+    if [ "${NPM_CONFIG_PREFIX}" != '' ]
     then
-        if [ "${NPM_CONFIG_PREFIX}" != '' ]
-        then
-            PATH=${PATH/:${NPM_CONFIG_PREFIX}\/bin/}
-        fi
-
-        export NPM_CONFIG_PREFIX="${WORKSPACE}/.npm-packages"
-        export NODE_PATH="${NPM_CONFIG_PREFIX}/lib/node_modules"
-
-        if [ -d "${NPM_CONFIG_PREFIX}" -a -r "${NPM_CONFIG_PREFIX}" ]
-        then
-            export PATH="${PATH}:${NPM_CONFIG_PREFIX}/bin"
-        fi
-
-        npm config set prefix "${NPM_CONFIG_PREFIX}"
+        PATH=${PATH/:${NPM_CONFIG_PREFIX}\/bin/}
     fi
+
+    export NPM_CONFIG_PREFIX="${WORKSPACE}/.npm-packages"
+    export NODE_PATH="${NPM_CONFIG_PREFIX}/lib/node_modules"
+
+    if [ -d "${NPM_CONFIG_PREFIX}/bin" -a -r "${NPM_CONFIG_PREFIX}/bin" ]
+    then
+        export PATH="${PATH}:${NPM_CONFIG_PREFIX}/bin"
+    fi
+
+    npm config set prefix "${NPM_CONFIG_PREFIX}"
 
     if [ "$(history | tail -n 1 | awk '{ print $2 }')" = 'cd' ]
     then
