@@ -112,6 +112,14 @@ function export-workspace() {
     fi
 }
 
+function mcd() {
+	md "$@" && cd "$@"
+}
+
+function rmcd() {
+	rd "$@" && mcd "$@"
+}
+
 function pd()
 {
     if [ $# -eq 1 ]
