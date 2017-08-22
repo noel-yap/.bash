@@ -6,6 +6,38 @@ alias rd='rm -rf'
 alias shred='shred -n 255 -u -z'
 
 # functions
+function cdb()
+{
+    pushd .
+
+    OLDCDPATH=${CDPATH}
+
+    while [ ! -f settings.gradle -a "${PWD}" != "/" ]
+    do
+        cd .. >/dev/null 2>&1
+    done
+
+    if [ -f settings.gradle ]
+    then
+        CDPATH=${PWD}:${CDPATH}
+
+        if [ -n "$1" ]
+        then
+            d=$1
+        else
+            d=-
+        fi
+    else
+      d=~
+    fi
+
+    popd
+
+    cd $d
+
+    CDPATH=${OLDCDPATH}
+}
+
 function cdg()
 {
     cd "$(git rev-parse --show-toplevel)"
