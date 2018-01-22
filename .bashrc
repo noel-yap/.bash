@@ -119,7 +119,7 @@ function export-workspace() {
     export HISTFILE="${WORKSPACE}/.bash_history"
     export GRADLE_USER_HOME="${WORKSPACE}/.gradle"
     export M2_REPO="${WORKSPACE}/.m2"
-    export NEBULA_HOME="$(\ls -U {$(git rev-parse --show-toplevel 2>/dev/null),${WORKSPACE}/nebula/wrapper}/gradlew 2>/dev/null | head -n 1 | xargs dirname 2>/dev/null | sed -e 's|/$||')"
+    export NEBULA_HOME="$(\ls -U {.,$(git rev-parse --show-toplevel 2>/dev/null),${WORKSPACE}/nebula/wrapper}/gradlew 2>/dev/null | head -n 1 | xargs dirname 2>/dev/null | sed -e 's|/$||')"
 
     if [ "${NPM_CONFIG_PREFIX}" != '' ]
     then
