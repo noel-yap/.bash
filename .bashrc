@@ -1,6 +1,7 @@
 . ~/.bash/uname/$(uname).sh
 
 # aliases
+alias cd.='cd $(pwd)'
 alias md='mkdir -p'
 alias rd='rm -rf'
 alias shred='shred -n 255 -u -z'
@@ -119,7 +120,7 @@ function export-workspace() {
     export HISTFILE="${WORKSPACE}/.bash_history"
     export GRADLE_USER_HOME="${WORKSPACE}/.gradle"
     export M2_REPO="${WORKSPACE}/.m2"
-    export NEBULA_HOME="$(\ls -U {.,$(git rev-parse --show-toplevel 2>/dev/null),${WORKSPACE}/nebula/wrapper}/gradlew 2>/dev/null | head -n 1 | xargs dirname 2>/dev/null | sed -e 's|/$||')"
+    export NEBULA_HOME="$(realpath $(\ls -U {.,$(git rev-parse --show-toplevel 2>/dev/null),${WORKSPACE}/nebula/wrapper}/gradlew 2>/dev/null | head -n 1 | xargs dirname 2>/dev/null | sed -e 's|/$||'))"
 
     if [ "${NPM_CONFIG_PREFIX}" != '' ]
     then
@@ -233,7 +234,7 @@ export HISTIGNORE="&"
 export HISTSIZE=256
 export HISTFILESIZE=65536
 
-export PATH=~/bin:${PATH}
+export PATH=~/bin:/opt/curl/bin:${PATH}
 export PATH=${PATH}:${JAVA_HOME}/bin
 
 export PROMPT_COMMAND="prompt-command"
