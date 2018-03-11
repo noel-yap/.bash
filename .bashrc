@@ -234,6 +234,8 @@ export HISTIGNORE="&"
 export HISTSIZE=256
 export HISTFILESIZE=65536
 
+export JAVA_HOME=$(/usr/libexec/java_home)
+
 export PATH=~/bin:/opt/curl/bin:${PATH}
 export PATH=${PATH}:${JAVA_HOME}/bin
 
