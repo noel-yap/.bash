@@ -225,7 +225,7 @@ ulimit -c unlimited
 # umask
 umask 0027
 
-export CDPATH=.:~:~/proj:~/tasks
+export CDPATH=.:~:~/tasks
 
 export EDITOR=vi
 
