@@ -135,7 +135,7 @@ function export-workspace() {
         export PATH="${PATH}:${NPM_CONFIG_PREFIX}/bin"
     fi
 
-    npm config set prefix "${NPM_CONFIG_PREFIX}"
+    npm config set prefix "${NPM_CONFIG_PREFIX}" 2>/dev/null
 
     if [ "$(history | tail -n 1 | awk '{ print $2 }')" = 'cd' ]
     then
