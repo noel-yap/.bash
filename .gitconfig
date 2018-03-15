@@ -11,9 +11,6 @@
 	unstage = "reset -q HEAD --"
 	upstream-set = "!github-upstream-set.sh"
 [core]
-	#fileMode = false
-	#autocrlf = input # turned off for now since it causes error upon adding `gradlew.bat`
-	safecrlf = true
 	editor = vi
 [user]
 	name = Noel Yap
