@@ -172,7 +172,13 @@ function pp()
 }
 
 function _ps1_root() {
-  echo "\u:$(id -gn)@\h:\w|$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+    local rev_spec=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+    if [ "${rev_spec}" == 'HEAD' ]
+    then
+        rev_spec=$(git rev-parse HEAD | sed -e 's|^\([0-9a-f]\{8\}\).*|\1|')
+    fi
+
+    echo "\u:$(id -gn)@\h:\w|${rev_spec}"
 }
 
 if [ "$TERM" = "screen" -o "$TERM" = "xterm" ]
