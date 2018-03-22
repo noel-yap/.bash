@@ -175,6 +175,10 @@ function _ps1_root() {
     local rev_spec=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
     if [ "${rev_spec}" == 'HEAD' ]
     then
+        rev_spec=$(git describe --tags)
+    fi
+    if [ "${rev_spec}" == 'HEAD' ]
+    then
         rev_spec=$(git rev-parse HEAD | sed -e 's|^\([0-9a-f]\{8\}\).*|\1|')
     fi
 
