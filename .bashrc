@@ -7,8 +7,7 @@ alias rd='rm -rf'
 alias shred='shred -n 255 -u -z'
 
 # functions
-function cdb()
-{
+function cdb() {
     pushd .
 
     OLDCDPATH=${CDPATH}
@@ -39,13 +38,11 @@ function cdb()
     CDPATH=${OLDCDPATH}
 }
 
-function cdg()
-{
+function cdg() {
     cd "$(git rev-parse --show-toplevel)"
 }
 
-function cdw()
-{
+function cdw() {
     pushd .
 
     OLDCDPATH=${CDPATH}
@@ -76,13 +73,13 @@ function cdw()
     CDPATH=${OLDCDPATH}
 }
 
-create-grpc-project() {
+function create-grpc-project() {
     ~/bin/create-grpc-project "$@"
 
     cd "${!#}"
 }
 
-create-workspace() {
+function create-workspace() {
     for v in "$@"
     do
         case ${v} in
@@ -109,8 +106,7 @@ create-workspace() {
     cd "${wd}/${repo}"
 }
 
-e()
-{
+function e() {
     emacs -g 120x50 "$@" &
 }
 
@@ -179,7 +175,7 @@ function _ps1_root() {
     fi
     if [ "${rev_spec}" == 'HEAD' -o -z "${rev_spec}" ]
     then
-        rev_spec=$(git rev-parse HEAD | sed -e 's|^\([0-9a-f]\{8\}\).*|\1|')
+        rev_spec=$(git rev-parse HEAD 2>/dev/null | sed -e 's|^\([0-9a-f]\{8\}\).*|\1|')
     fi
 
     echo "\u:$(id -gn)@\h:\w|${rev_spec}"
