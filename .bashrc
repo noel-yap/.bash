@@ -113,6 +113,7 @@ function e() {
 function export-workspace() {
     export WORKSPACE="$(cdw >/dev/null; pwd)"
 
+    export GOPATH="${WORKSPACE}/go"
     export HISTFILE="${WORKSPACE}/.bash_history"
     export GRADLE_USER_HOME="${WORKSPACE}/.gradle"
     export M2_REPO="${WORKSPACE}/.m2"
