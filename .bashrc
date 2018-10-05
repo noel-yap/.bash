@@ -241,7 +241,7 @@ export HISTIGNORE="&"
 export HISTSIZE=256
 export HISTFILESIZE=65536
 
-export JAVA_HOME=$(/usr/libexec/java_home 2>/dev/null || \ls -d /opt/jdk1.8)
+export JAVA_HOME=$(/usr/libexec/java_home 2>/dev/null || \ls -d /opt/zulu8)
 
 export PATH=~/bin:/opt/curl/bin:${PATH}
 export PATH=${PATH}:${JAVA_HOME}/bin
