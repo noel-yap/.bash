@@ -144,11 +144,17 @@ function export-workspace() {
 }
 
 function mcd() {
-	md "$@" && cd "$@"
+    md "$@" && cd "$@"
 }
 
 function rmcd() {
-	rd "$@" && mcd "$@"
+    rd "$@" && mcd "$@"
+}
+
+function rmcd.() {
+    local cwd=$(basename $(pwd))
+
+    cd .. && rmcd "${cwd}"
 }
 
 function pd()
