@@ -1,4 +1,5 @@
 . ~/.bash/uname/$(uname).sh
+. ~/.bash/com.netflix.sh
 
 # aliases
 alias cd.='cd $(pwd)'
