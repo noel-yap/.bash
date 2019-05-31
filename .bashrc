@@ -248,7 +248,7 @@ export HISTIGNORE="&"
 export HISTSIZE=256
 export HISTFILESIZE=65536
 
-export JAVA_HOME=$(/usr/libexec/java_home 2>/dev/null || \ls -d /opt/zulu8)
+export JAVA_HOME=/usr/lib/jvm/zulu-8-amd64
 
 export PATH=~/bin:/opt/curl/bin:${PATH}
 export PATH=${PATH}:${JAVA_HOME}/bin
