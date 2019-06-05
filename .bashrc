@@ -189,7 +189,7 @@ function _ps1_root() {
     echo "\u:$(id -gn)@\h:\w|${rev_spec}"
 }
 
-if [ "$TERM" = "screen" -o "$TERM" = "xterm" ]
+if [ "${TERM}" = 'screen' -o "${TERM:0:5}" = 'xterm' ]
 then
     function prompt-command() {
         export-workspace
