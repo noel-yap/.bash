@@ -1,12 +1,12 @@
 [alias]
 	aliases = "config --get-regexp alias"
-        destash = "!git stash apply"
+        destash = "stash apply"
 	get = "!bb-get.sh"
 	checkout-pr = "!bb-checkout-pr.sh"
 	graph = log --graph --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
 	push-pull = "!while ! git push; do git pull; done"
-	reset-file = "checkout --"
 	uncommit = "reset --hard HEAD^ --"
+	unedit = "checkout --"
 	unstage = "reset -q HEAD --"
 	upstream-set = "!github-upstream-set.sh"
 [core]
