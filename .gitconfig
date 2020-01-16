@@ -20,3 +20,6 @@
 	date = iso-strict-local
 [push]
 	default = current
+
+[include]
+	path = ~/.gitconfig.netflix.com
