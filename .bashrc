@@ -117,7 +117,7 @@ function export-workspace() {
     export GOPATH="${WORKSPACE}/go"
     export HISTFILE="${WORKSPACE}/.bash_history"
     export GRADLE_USER_HOME="${WORKSPACE}/.gradle"
-    export M2_REPO="${WORKSPACE}/.m2"
+    export M2_HOME="${WORKSPACE}/.m2"
     export NEBULA_HOME="$(realpath $(\ls -U {.,$(git rev-parse --show-toplevel 2>/dev/null),${WORKSPACE}/nebula/wrapper}/gradlew 2>/dev/null | head -n 1 | xargs dirname 2>/dev/null | sed -e 's|/$||') 2>/dev/null)"
 
     if [ "${NPM_CONFIG_PREFIX}" != '' ]
@@ -247,8 +247,6 @@ export HISTCONTROL=ignoredups
 export HISTIGNORE="&"
 export HISTSIZE=256
 export HISTFILESIZE=65536
-
-export JAVA_HOME=/usr/lib/jvm/zulu-8-amd64
 
 export PATH=~/bin:/opt/curl/bin:${PATH}
 export PATH=${PATH}:${JAVA_HOME}/bin
