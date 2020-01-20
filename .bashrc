@@ -74,12 +74,6 @@ function cdw() {
     CDPATH=${OLDCDPATH}
 }
 
-function create-grpc-project() {
-    ~/bin/create-grpc-project "$@"
-
-    cd "${!#}"
-}
-
 function create-workspace() {
     for v in "$@"
     do
