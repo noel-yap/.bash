@@ -1,3 +1,5 @@
+export PATH="${PATH/:${JAVA_HOME}\/bin/}"
+
 . ~/.bash/uname/$(uname).sh
 
 # aliases
@@ -100,33 +102,14 @@ function create-workspace() {
     cd "${wd}/${repo}"
 }
 
-function e() {
-    emacs -g 120x50 "$@" &
-}
-
 function export-workspace() {
     export WORKSPACE="$(cdw >/dev/null; pwd)"
 
     export GOPATH="${WORKSPACE}/go"
     export HISTFILE="${WORKSPACE}/.bash_history"
     export GRADLE_USER_HOME="${WORKSPACE}/.gradle"
-    export M2_HOME="${WORKSPACE}/.m2"
+    export M2_REPO="${WORKSPACE}/.m2"
     export NEBULA_HOME="$(realpath $(\ls -U {.,$(git rev-parse --show-toplevel 2>/dev/null),${WORKSPACE}/nebula/wrapper}/gradlew 2>/dev/null | head -n 1 | xargs dirname 2>/dev/null | sed -e 's|/$||') 2>/dev/null)"
-
-    if [ "${NPM_CONFIG_PREFIX}" != '' ]
-    then
-        PATH=${PATH/:${NPM_CONFIG_PREFIX}\/bin/}
-    fi
-
-    export NPM_CONFIG_PREFIX="${WORKSPACE}/.npm-packages"
-    export NODE_PATH="${NPM_CONFIG_PREFIX}/lib/node_modules"
-
-    if [ -d "${NPM_CONFIG_PREFIX}/bin" -a -r "${NPM_CONFIG_PREFIX}/bin" ]
-    then
-        export PATH="${PATH}:${NPM_CONFIG_PREFIX}/bin"
-    fi
-
-    npm config set prefix "${NPM_CONFIG_PREFIX}" 2>/dev/null
 
     if [ "$(history | tail -n 1 | awk '{ print $2 }')" = 'cd' ]
     then
@@ -232,6 +215,16 @@ ulimit -c unlimited
 # umask
 umask 0027
 
+# homebrew
+export HOMEBREW_PREFIX='/home/nyap/.linuxbrew'
+export HOMEBREW_CELLAR='/home/nyap/.linuxbrew/Cellar'
+export HOMEBREW_REPOSITORY='/home/nyap/.linuxbrew/Homebrew'
+export MANPATH="${MANPATH}:/home/nyap/.linuxbrew/share/man"
+export INFOPATH="${INFOPATH}:/home/nyap/.linuxbrew/share/info"
+
+# protop
+export PROTOP_HOME=${HOMEBREW_PREFIX}
+
 export CDPATH=.:~:~/tasks
 
 export EDITOR=vi
@@ -241,8 +234,9 @@ export HISTIGNORE="&"
 export HISTSIZE=256
 export HISTFILESIZE=65536
 
-export PATH=~/bin:/opt/curl/bin:${PATH}
+export PATH=~/bin:${PATH}
 export PATH=${PATH}:${JAVA_HOME}/bin
+export PATH=${PATH}:${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
 
 export PROMPT_COMMAND="prompt-command"
 export PS2="  "
@@ -251,3 +245,7 @@ if [ -z "${DISPLAY}" ]
 then
   sd
 fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
