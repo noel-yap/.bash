@@ -1,5 +1,3 @@
-export PATH="${PATH/:${JAVA_HOME}\/bin/}"
-
 . ~/.bash/uname/$(uname).sh
 
 # aliases
@@ -7,6 +5,7 @@ alias cd.='cd $(pwd)'
 alias md='mkdir -p'
 alias rd='rm -rf'
 alias shred='shred -n 255 -u -z'
+alias wp="$(git rev-parse --show-toplevel)/node_modules/.bin/webpack"
 
 # functions
 function cdb() {
