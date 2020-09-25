@@ -5,7 +5,6 @@ alias cd.='cd $(pwd)'
 alias md='mkdir -p'
 alias rd='rm -rf'
 alias shred='shred -n 255 -u -z'
-alias wp="$(git rev-parse --show-toplevel)/node_modules/.bin/webpack"
 
 # functions
 function cdb() {
@@ -102,6 +101,11 @@ function create-workspace() {
 }
 
 function export-workspace() {
+    if git rev-parse --is-inside-work-tree >/dev/null 2>&1
+    then
+        alias wp="$(git rev-parse --show-toplevel)/node_modules/.bin/webpack"
+    fi
+
     export WORKSPACE="$(cdw >/dev/null; pwd)"
 
     export GOPATH="${WORKSPACE}/go"
@@ -161,7 +165,12 @@ function _ps1_root() {
         rev_spec=$(git rev-parse HEAD 2>/dev/null | sed -e 's|^\([0-9a-f]\{8\}\).*|\1|')
     fi
 
-    echo "\u:$(id -gn)@\h:\w|${rev_spec}"
+    if [ -z "${rev_spec}" ]
+    then
+        echo "\u:$(id -gn)@\h:\w"
+    else
+        echo "\u:$(id -gn)@\h:\w|${rev_spec}"
+    fi
 }
 
 if [ "${TERM}" = 'screen' -o "${TERM:0:5}" = 'xterm' ]
