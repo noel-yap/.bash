@@ -20,6 +20,8 @@
 	date = iso-strict-local
 [push]
 	default = current
+[pull]
+	rebase = true
 
 [include]
-	path = ~/.gitconfig.netflix.com
+	path = ~/.gitconfig.grailbio.com
