@@ -1,4 +1,5 @@
 . ~/.bash/uname/$(uname).sh
+. ~/.bashrc.$(hostname)
 
 # aliases
 alias cd.='cd $(pwd)'
