@@ -11,6 +11,7 @@
 	upstream-set = "!github-upstream-set.sh"
 [core]
 	editor = vi
+	excludesfile = ~/.gitignore-global
 [user]
 	name = Noel Yap
 	email = noel.yap+github.com@gmail.com
