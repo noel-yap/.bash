@@ -101,23 +101,10 @@ function create-workspace() {
     cd "${wd}/${repo}"
 }
 
-function export-workspace() {
-    if git rev-parse --is-inside-work-tree >/dev/null 2>&1
-    then
-        alias wp="$(git rev-parse --show-toplevel)/node_modules/.bin/webpack"
-    fi
-
-    export WORKSPACE="$(cdw >/dev/null; pwd)"
-
-    export GOPATH="${WORKSPACE}/go"
-    export HISTFILE="${WORKSPACE}/.bash_history"
-    export GRADLE_USER_HOME="${WORKSPACE}/.gradle"
-    export M2_REPO="${WORKSPACE}/.m2"
-    export NEBULA_HOME="$(realpath $(\ls -U {.,$(git rev-parse --show-toplevel 2>/dev/null),${WORKSPACE}/nebula/wrapper}/gradlew 2>/dev/null | head -n 1 | xargs dirname 2>/dev/null | sed -e 's|/$||') 2>/dev/null)"
-
+function manage-history() {
     if [ "$(history | tail -n 1 | awk '{ print $2 }')" = 'cd' ]
     then
-        history -r ${HISTFILE}
+        history -r "${HISTFILE}"
     else
         history -a
     fi
@@ -177,12 +164,12 @@ function _ps1_root() {
 if [ "${TERM}" = 'screen' -o "${TERM:0:5}" = 'xterm' ]
 then
     function prompt-command() {
-        export-workspace
+        manage-history
         export PS1="$(_ps1_root)> \[\e]0;$(_ps1_root)\a\]"
     }
 else
     function prompt-command() {
-        export-workspace
+        manage-history
         export PS1="$(_ps1_root)> "
     }
 fi
