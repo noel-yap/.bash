@@ -1,0 +1,68 @@
+function is-def() {
+  flag=$1
+  name=$2
+
+  case "${flag}" in
+    -a)
+      [[ "$(type -t ${name} 2>/dev/null)" == 'alias' ]]
+      ;;
+
+    -f)
+      [[ "$(type -t ${name} 2>/dev/null)" == 'function' ]]
+      ;;
+
+    -v)
+      [[ -n "${!name+defined}" ]]
+      ;;
+  esac
+}
+
+function get-set-def() {
+  flag=$1
+  name=$2
+
+  case "${flag}" in
+    -a)
+      type ${name} | sed -e 's|^|eval \$(alias |' -e $'s| is aliased to \`|=\'|' -e 's|$|)|'
+      ;;
+
+    -f)
+      type ${name} | tail -n +2 | sed -e $'1{ s/^/eval \'function /; }' -e $'${ s/$/\'/; }'
+      ;;
+
+    -v)
+      echo ${!name} | sed -e "s|^|eval \$(${name}=|" -e 's|$|)|'
+      ;;
+  esac
+}
+
+function get-unset-def() {
+  flag=$1
+  name=$2
+
+  case "${flag}" in
+    -a)
+      echo "unalias ${name}"
+      ;;
+
+    -f)
+      echo "unset -f ${name}"
+      ;;
+
+    -v)
+      echo "unset ${name}"
+      ;;
+  esac
+}
+
+function get-reset-def() {
+  flag=$1
+  varname=$2
+
+  if is-def ${flag} ${varname}
+  then
+    get-set-def ${flag} ${varname}
+  else
+    get-unset-def ${flag} ${varname}
+  fi
+} 

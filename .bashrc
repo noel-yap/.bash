@@ -2,12 +2,15 @@
 . ~/.bashrc.$(hostname)
 
 # aliases
+alias baz=bazel
 alias cd.='cd $(pwd)'
 alias md='mkdir -p'
 alias rd='rm -rf'
 alias shred='shred -n 255 -u -z'
 
 # functions
+. ~/.bash/def.shlib
+
 function cdg() {
     cd "$(git rev-parse --show-toplevel)"/"$1"
 }
@@ -112,6 +115,8 @@ function pp()
 }
 
 function _ps1_root() {
+    local ps1_root="\u:$(id -gn)@\h:\w"
+
     local rev_spec=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
     if [ "${rev_spec}" == 'HEAD' ]
     then
@@ -122,24 +127,33 @@ function _ps1_root() {
         rev_spec=$(git rev-parse HEAD 2>/dev/null | sed -e 's|^\([0-9a-f]\{8\}\).*|\1|')
     fi
 
-    if [ -z "${rev_spec}" ]
+    if [ -n "${rev_spec}" ]
     then
-        echo "\u:$(id -gn)@\h:\w"
-    else
-        echo "\u:$(id -gn)@\h:\w|${rev_spec}"
+        ps1_root="${ps1_root}ᚴ${rev_spec}"
     fi
+
+    if [ -n "${CLUSTER}" ]
+    then
+        ps1_root="${ps1_root}ᛝ${CLUSTER}"
+    fi
+
+    echo "${ps1_root}"
 }
 
 if [ "${TERM}" = 'screen' -o "${TERM:0:5}" = 'xterm' ]
 then
     function prompt-command() {
         manage-history
-        export PS1="$(_ps1_root)> \[\e]0;$(_ps1_root)\a\]"
+
+        local ps1_root="$(_ps1_root)"
+        export PS1="${ps1_root}> \[\e]0;${ps1_root}\a\]"
     }
 else
     function prompt-command() {
         manage-history
-        export PS1="$(_ps1_root)> "
+
+        local ps1_root="$(_ps1_root)"
+        export PS1="${ps1_root}> "
     }
 fi
 
@@ -180,16 +194,6 @@ ulimit -c unlimited
 # umask
 umask 0027
 
-# homebrew
-export HOMEBREW_PREFIX='/home/nyap/.linuxbrew'
-export HOMEBREW_CELLAR='/home/nyap/.linuxbrew/Cellar'
-export HOMEBREW_REPOSITORY='/home/nyap/.linuxbrew/Homebrew'
-export MANPATH="${MANPATH}:/home/nyap/.linuxbrew/share/man"
-export INFOPATH="${INFOPATH}:/home/nyap/.linuxbrew/share/info"
-
-# protop
-export PROTOP_HOME=${HOMEBREW_PREFIX}
-
 export CDPATH=.:~:~/tasks
 
 export EDITOR=vi
@@ -199,9 +203,11 @@ export HISTIGNORE="&"
 export HISTSIZE=256
 export HISTFILESIZE=65536
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 export PATH=~/bin:${PATH}
-export PATH=${PATH}:${JAVA_HOME}/bin
-export PATH=${PATH}:${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin
 
 export PROMPT_COMMAND="prompt-command"
 export PS2="  "
@@ -211,8 +217,13 @@ then
   sd
 fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# direnv
+function direnv-reset-def() {
+  eval "${DIRENV_RESET_DEF}"
+}
+
+function direnv-set-def() {
+  eval "${DIRENV_SET_DEF}"
+}
 
 eval "$(direnv hook bash)"
