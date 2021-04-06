@@ -21,17 +21,18 @@ function get-set-def() {
   flag=$1
   name=$2
 
+  local def
   case "${flag}" in
     -a)
-      type ${name} | sed -e 's|^|eval \$(alias |' -e $'s| is aliased to \`|=\'|' -e 's|$|)|'
+      alias ${name}
       ;;
 
     -f)
-      type ${name} | tail -n +2 | sed -e $'1{ s/^/eval \'function /; }' -e $'${ s/$/\'/; }'
+      declare -f ${name}
       ;;
 
     -v)
-      echo ${!name} | sed -e "s|^|eval \$(${name}=|" -e 's|$|)|'
+      echo "${name}=${!name})"
       ;;
   esac
 }
