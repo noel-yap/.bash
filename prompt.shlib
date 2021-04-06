@@ -1,0 +1,46 @@
+function _ps1_root() {
+    local ps1_root="\u:$(id -gn)@\h:\w"
+
+    local rev_spec=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+    if [ "${rev_spec}" == 'HEAD' ]
+    then
+        rev_spec=$(git describe --tags 2>/dev/null)
+    fi
+    if [ "${rev_spec}" == 'HEAD' -o -z "${rev_spec}" ]
+    then
+        rev_spec=$(git rev-parse HEAD 2>/dev/null | sed -e 's|^\([0-9a-f]\{8\}\).*|\1|')
+    fi
+
+    if [ -n "${rev_spec}" ]
+    then
+        ps1_root="${ps1_root}ᚴ${rev_spec}"
+    fi
+
+    if [ -n "${CLUSTER}" ]
+    then
+        ps1_root="${ps1_root}ᛝ${CLUSTER}"
+    fi
+
+    echo "${ps1_root}"
+}
+
+if [ "${TERM}" = 'screen' -o "${TERM:0:5}" = 'xterm' ]
+then
+    function prompt-command() {
+        manage-history
+
+        local ps1_root="$(_ps1_root)"
+        export PS1="${ps1_root}> \[\e]0;${ps1_root}\a\]"
+    }
+else
+    function prompt-command() {
+        manage-history
+
+        local ps1_root="$(_ps1_root)"
+        export PS1="${ps1_root}> "
+    }
+fi
+
+export PS2="  "
+
+export PROMPT_COMMAND="direnv-reset-def;_direnv_hook;direnv-set-def;prompt-command"
