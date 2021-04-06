@@ -16,26 +16,18 @@ function _ps1_root() {
         ps1_root="${ps1_root}ᚴ${rev_spec}"
     fi
 
-    if [ -n "${CLUSTER}" ]
-    then
-        ps1_root="${ps1_root}ᛝ${CLUSTER}"
-    fi
-
     echo "${ps1_root}"
 }
+export -f _ps1_root
 
 if [ "${TERM}" = 'screen' -o "${TERM:0:5}" = 'xterm' ]
 then
     function prompt-command() {
-        manage-history
-
         local ps1_root="$(_ps1_root)"
         export PS1="${ps1_root}> \[\e]0;${ps1_root}\a\]"
     }
 else
     function prompt-command() {
-        manage-history
-
         local ps1_root="$(_ps1_root)"
         export PS1="${ps1_root}> "
     }
@@ -43,4 +35,4 @@ fi
 
 export PS2="  "
 
-export PROMPT_COMMAND="direnv-reset-def;_direnv_hook;direnv-set-def;prompt-command"
+export PROMPT_COMMAND="direnv-reset-def;_direnv_hook;direnv-set-def;manage-history;prompt-command"
