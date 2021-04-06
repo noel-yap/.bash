@@ -25,14 +25,15 @@ then
     function prompt-command() {
         local ps1_root="$(_ps1_root)"
         export PS1="${ps1_root}> \[\e]0;${ps1_root}\a\]"
+        export PS2="  "
     }
 else
     function prompt-command() {
         local ps1_root="$(_ps1_root)"
         export PS1="${ps1_root}> "
+        export PS2="  "
     }
 fi
 
-export PS2="  "
 
 export PROMPT_COMMAND="direnv-reset-def;_direnv_hook;direnv-set-def;manage-history;prompt-command"
