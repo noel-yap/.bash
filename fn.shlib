@@ -1,0 +1,8 @@
+function copy-fn() {
+  source="$1"
+  target="$2"
+
+  local fn_def="$(declare -f ${source})"
+  eval "${fn_def/${source}/${target}}"
+}   
+

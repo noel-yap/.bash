@@ -1,7 +1,3 @@
-function ps1-prefix() {
-  :
-}
-
 function ps1-root() {
     local ps1_root="\u:$(id -gn)@\h:\w"
 
@@ -23,20 +19,16 @@ function ps1-root() {
     echo "${ps1_root}"
 }
 
-function ps1-suffix() {
-  :
-}
-
 if [ "${TERM}" = 'screen' -o "${TERM:0:5}" = 'xterm' ]
 then
     function prompt-command() {
-        local ps1="$(ps1-prefix)$(ps1-root)$(ps1-suffix)"
+        local ps1="$(ps1-root)"
         export PS1="${ps1}> \[\e]0;${ps1}\a\]"
         export PS2="  "
     }
 else
     function prompt-command() {
-        local ps1="$(ps1-prefix)$(ps1-root)$(ps1-suffix)"
+        local ps1="$(ps1-root)"
         export PS1="${ps1}> "
         export PS2="  "
     }
