@@ -37,7 +37,7 @@ function is-def() {
 
   case "${flag}" in
     -a)
-      [[ "$(type -t ${name} 2>/dev/null)" == 'alias' ]]
+      alias "${name}" >/dev/null 2>/dev/null
       ;;
 
     -f)
