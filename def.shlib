@@ -1,34 +1,11 @@
-function export-def() {
-  flag=$1
-  name=$2
-
-  case "${flag}" in
-    -a)
-      export ALIASES=$(cat <<-EOF
-	  ${ALIASES}
-	  $(alias "${name}")
-	EOF
-      )
-      ;;
-
-    -f)
-      export -f "${name}"
-      ;;
-
-    -v)
-      export "${name}"
-      ;;
-  esac
+function export-defs() {
+  export ALIASES="$(alias)"
+  export FUNCTIONS="$(declare -f)"
 }
 
 function import-defs() {
-  flag=$1
-
-  case "${flag}" in
-    -a)
-      eval "${ALIASES}"
-      ;;
-  esac
+  eval "${ALIASES}"
+  eval "${FUNCTIONS}"
 }
 
 function is-def() {

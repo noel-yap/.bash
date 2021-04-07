@@ -1,4 +1,4 @@
-function _ps1_root() {
+function ps1-root() {
     local ps1_root="\u:$(id -gn)@\h:\w"
 
     local rev_spec=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
@@ -18,22 +18,21 @@ function _ps1_root() {
 
     echo "${ps1_root}"
 }
-export -f _ps1_root
 
 if [ "${TERM}" = 'screen' -o "${TERM:0:5}" = 'xterm' ]
 then
     function prompt-command() {
-        local ps1_root="$(_ps1_root)"
+        local ps1_root="$(ps1-root)"
         export PS1="${ps1_root}> \[\e]0;${ps1_root}\a\]"
         export PS2="  "
     }
 else
     function prompt-command() {
-        local ps1_root="$(_ps1_root)"
+        local ps1_root="$(ps1-root)"
         export PS1="${ps1_root}> "
         export PS2="  "
     }
 fi
 
 
-export PROMPT_COMMAND="direnv-reset-def;_direnv_hook;direnv-set-def;manage-history;prompt-command"
+export PROMPT_COMMAND="export-defs;direnv-reset-def;_direnv_hook;direnv-set-def;manage-history;prompt-command"
