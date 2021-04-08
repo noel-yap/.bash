@@ -11,7 +11,7 @@ alias shred='shred -n 255 -u -z'
 # functions
 . ~/.bash/def.shlib
 
-function cdg() {
+function cdr() {
     cd "$(git rev-parse --show-toplevel)"/"$1"
 }
 
@@ -44,33 +44,6 @@ function cdw() {
     cd $d
 
     CDPATH=${OLDCDPATH}
-}
-
-function create-workspace() {
-    for v in "$@"
-    do
-        case ${v} in
-            --pr=*)
-                pr=${v/--pr=/}
-                ;;
-            --repo=*)
-                repo=${v/--repo=/}
-                ;;
-        esac
-    done
-
-    ~/bin/create-workspace "$@"
-
-    case "${!#}" in
-        --*=*)
-            wd="${repo}.pr-${pr}"
-            ;;
-        *)
-            wd="${!#}"
-            ;;
-    esac
-
-    cd "${wd}/${repo}"
 }
 
 function manage-history() {
