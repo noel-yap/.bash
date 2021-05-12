@@ -23,6 +23,3 @@
 	default = current
 [pull]
 	rebase = true
-
-[include]
-	path = ~/.gitconfig.grailbio.com
