@@ -44,7 +44,9 @@ function cdw() {
 }
 
 function manage-history() {
-    if [[ "$(history | tail -n 1 | awk '{ print $2 }')" = cd? ]]
+    if [[ -n "${HISTFILE}" ]] &&
+        [[ "$(history -w /dev/stdout | tail -n 1)" != "$(tail -n 1 "${HISTFILE}")" ]] ||
+        [[ "$(history | tail -n 1 | awk '{ print $2 }')" = cd? ]]
     then
         history -r "${HISTFILE}"
     else
