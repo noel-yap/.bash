@@ -1,6 +1,3 @@
-. ~/.bash/uname/$(uname).sh
-. ~/.bashrc.$(hostname)
-
 # aliases
 alias baz=bazel
 alias cd.='cd $(pwd)'
@@ -47,7 +44,7 @@ function cdw() {
 }
 
 function manage-history() {
-    if [ "$(history | tail -n 1 | awk '{ print $2 }')" = 'cd' ]
+    if [[ "$(history | tail -n 1 | awk '{ print $2 }')" = cd? ]]
     then
         history -r "${HISTFILE}"
     else
@@ -137,7 +134,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PATH=~/bin:${PATH}
+PATH=/home/nyap/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 if [ -z "${DISPLAY}" ]
 then
@@ -156,3 +153,6 @@ function direnv-set-def() {
 eval "$(direnv hook bash)"
 
 . ~/.bash/prompt.shlib
+
+. ~/.bash/uname/$(uname).sh
+. ~/.bashrc.$(hostname) 2>/dev/null

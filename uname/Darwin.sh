@@ -1,3 +1,4 @@
+alias cbcopy=pbcopy
 alias ls='ls -AbFG'
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
