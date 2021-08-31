@@ -35,4 +35,4 @@ else
 fi
 
 
-export PROMPT_COMMAND="export-defs;direnv-reset-def;_direnv_hook;direnv-set-def;manage-history;prompt-command"
+export PROMPT_COMMAND="export-defs;direnv-reset-def;_direnv_hook;history -a;direnv-set-def;history -r;prompt-command"

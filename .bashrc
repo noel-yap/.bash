@@ -43,17 +43,6 @@ function cdw() {
     CDPATH=${OLDCDPATH}
 }
 
-function manage-history() {
-    if [[ -n "${HISTFILE}" ]] &&
-        [[ "$(history -w /dev/stdout | tail -n 1)" != "$(tail -n 1 "${HISTFILE}")" ]] ||
-        [[ "$(history | tail -n 1 | awk '{ print $2 }')" = cd? ]]
-    then
-        history -r "${HISTFILE}"
-    else
-        history -a
-    fi
-}
-
 function mcd() {
     md "$@" && cd "$@"
 }
