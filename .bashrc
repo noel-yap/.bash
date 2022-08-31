@@ -1,6 +1,7 @@
 # aliases
 alias baz=bazel
 alias cd.='cd $(pwd)'
+alias cdt='cd tasks'
 alias md='mkdir -p'
 alias rd='rm -rf'
 alias shred='shred -n 255 -u -z'
@@ -119,11 +120,11 @@ export EDITOR=vi
 export HISTCONTROL=ignoredups
 export HISTIGNORE="&"
 export HISTSIZE=256
-export HISTFILESIZE=65536
+export HISTFILESIZE=16384
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 PATH=/home/nyap/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
