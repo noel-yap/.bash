@@ -1,5 +1,5 @@
 alias cbcopy='xclip -selection clipboard'
-alias ls='ls --color --time-style='+%Y-%m-%dT%H:%M:%S' -AbF'
+alias ls='ls -AbF --color --time-style="+%Y-%m-%dT%H:%M:%S"'
 
 export JAVA_HOME=/usr/lib/jvm/java-14-openjdk-amd64
 
