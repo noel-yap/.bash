@@ -1,5 +1,3 @@
-[init]
-	defaultBranch = master
 [alias]
 	aliases = "config --get-regexp alias"
 	destash = "stash pop"
@@ -9,19 +7,25 @@
 	uncommit = "reset HEAD^ --"
 	unstage = "reset -q HEAD --"
 	upstream-set = "!github-upstream-set.sh"
-[core]
-	editor = vi
-	excludesfile = ~/.gitignore-global
 [user]
 	name = Noel Yap
 	email = noel.yap+github.com@gmail.com
-[merge]
-	tool = meld
-[log]
-	date = iso-strict-local
-[push]
-	default = current
 [pull]
 	rebase = true
+[push]
+	default = current
+[fetch]
+	prune = true
+[merge]
+	tool = meld
+[diff]
+	colorMoved = zebra
+[log]
+	date = iso-strict-local
+[core]
+	editor = vi
+	excludesfile = ~/.gitignore-global
+[init]
+	defaultBranch = master
 [http]
 	postBuffer = 524288000
