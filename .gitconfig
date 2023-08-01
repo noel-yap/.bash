@@ -2,6 +2,8 @@
 	aliases = "config --get-regexp alias"
 	destash = "stash pop"
 	clone-or-pull = "!git-clone-or-pull.sh"
+	get = "!git-get.sh"
+	graft = "!git-graft.sh"
 	graph = log --graph --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
 	push-pull = "!while ! git push; do git pull; done"
 	reap = "!git-reap.sh"
