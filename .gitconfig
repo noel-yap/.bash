@@ -24,6 +24,7 @@
 	tool = meld
 [diff]
 	colorMoved = zebra
+	renameLimit = 16384
 [log]
 	date = iso-strict-local
 [core]
