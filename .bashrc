@@ -133,6 +133,9 @@ then
   sd
 fi
 
+. ~/.bash/uname/$(uname).sh
+. ~/.bashrc.$(hostname) 2>/dev/null
+
 # direnv
 function direnv-reset-def() {
   eval "${DIRENV_RESET_DEF}"
@@ -145,6 +148,3 @@ function direnv-set-def() {
 eval "$(direnv hook bash)"
 
 . ~/.bash/prompt.shlib
-
-. ~/.bash/uname/$(uname).sh
-. ~/.bashrc.$(hostname) 2>/dev/null
