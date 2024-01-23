@@ -8,6 +8,7 @@
 	push-pull = "!while ! git push; do git pull; done"
 	reap = "!git-reap.sh"
 	sow = push
+	sprout = "!git-sprout.sh"
 	uncommit = "reset HEAD^ --"
 	unstage = "reset -q HEAD --"
 	upstream-set = "!github-upstream-set.sh"
@@ -34,3 +35,5 @@
 	defaultBranch = master
 [http]
 	postBuffer = 524288000
+[url "ssh://git@gitlab.com"]
+	insteadOf = https://gitlab.com
