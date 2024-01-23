@@ -9,6 +9,10 @@ alias shred='shred -n 255 -u -z'
 # functions
 . ~/.bash/def.shlib
 
+function cbcopy-git-log() {
+  git log -1 --pretty=%B | sed -ne '/^Summary:/,$ p' | sed -e '$d' | pbcopy
+}
+
 function cdr() {
     cd "$(git rev-parse --show-toplevel)"/"$1"
 }
