@@ -16,6 +16,7 @@
 	name = Noel Yap
 	email = noel.yap+github.com@gmail.com
 [pull]
+	default = current
 	rebase = true
 [push]
 	default = current
