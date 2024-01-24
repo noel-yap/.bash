@@ -1,5 +1,5 @@
 function ps1-root() {
-    local ps1_root="\u:$(id -gn)@\h:\w"
+    local ps1_root="\u:$(id -gn)@\h[$(arch)]:\w"
 
     local rev_spec=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
     if [ "${rev_spec}" == 'HEAD' ]
