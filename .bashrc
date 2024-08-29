@@ -1,7 +1,6 @@
 # aliases
 alias baz=bazel
 alias cd.='cd $(pwd)'
-alias cdt='cd tasks'
 alias md='mkdir -p'
 alias rd='rm -rf'
 alias shred='shred -n 255 -u -z'
@@ -15,6 +14,10 @@ function cbcopy-git-log() {
 
 function cdr() {
     cd "$(git rev-parse --show-toplevel)"/"$1"
+}
+
+function cdt() {
+    cd "tasks/$1"
 }
 
 function cdw() {
