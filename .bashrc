@@ -141,7 +141,7 @@ then
 fi
 
 . ~/.bash/uname/$(uname).sh
-. ~/.bashrc.$(hostname) 2>/dev/null
+. ~/".bashrc.$(hostname)" 2>/dev/null
 
 # direnv
 function direnv-reset-def() {
