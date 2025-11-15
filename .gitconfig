@@ -4,6 +4,7 @@
 	cb = "!git-cb.sh"
 	clone-or-pull = "!git-clone-or-pull.sh"
 	cpr = "!git-create-pr.sh"
+	ct = "!git-create-task.sh \"$@\" && cd \"$1/$2\""
 	cwc = "!git-clone-with-cache.sh"
 	get = "!git-get.sh"
 	graft = "!git-graft.sh"
