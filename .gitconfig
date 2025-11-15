@@ -3,15 +3,18 @@
 	destash = "stash pop"
 	cb = "!git-cb.sh"
 	clone-or-pull = "!git-clone-or-pull.sh"
+	cpr = "!git-create-pr.sh"
 	get = "!git-get.sh"
 	graft = "!git-graft.sh"
 	graph = log --graph --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
 	mb = 'branch'
 	mcb = "!git-mcb.sh"
+	mpr = "!git-merge-pr.sh"
 	push-pull = "!while ! git push; do git pull; done"
 	rb = "!git-shear.sh"
 	reap = "!git-reap.sh"
 	rmcb = "!git-rmcb.sh"
+	rpr = "!git-review-pr.sh"
 	shear = "!git-shear.sh"
 	snapshot = "!git-snapshot.sh"
 	sow = push
