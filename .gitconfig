@@ -40,10 +40,17 @@
 	editor = vi
 	excludesfile = ~/.gitignore-global
 [init]
-	defaultBranch = master
+	defaultBranch = main
 [http]
 	postBuffer = 524288000
 [url "ssh://git@gitlab.com"]
 	insteadOf = https://gitlab.com
 [branch]
 	autoSetupMerge = true
+[advice]
+	setUpstreamFailure = false
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
