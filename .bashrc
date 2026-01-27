@@ -1,3 +1,5 @@
+shopt -s nullglob
+
 # aliases
 alias baz=bazel
 alias cd.='cd $(pwd)'
@@ -142,6 +144,10 @@ fi
 
 . ~/.bash/uname/$(uname).sh
 . ~/".bashrc.$(hostname)" 2>/dev/null
+
+for rc in ~/.ssh/.bashrc.*; do
+  . "${rc}"
+done
 
 # direnv
 function direnv-reset-def() {
