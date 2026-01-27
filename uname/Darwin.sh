@@ -15,4 +15,4 @@ export CPPFLAGS="-I/opt/homebrew/opt/openjdk@21/include"
 
 export JAVA_HOME="${HOME}/lib/jdk-24.0.2.jdk/Contents/Home"
 
-export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:/opt/homebrew/opt/openjdk@21/bin:"${PATH}"
+export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:"${PATH}"
