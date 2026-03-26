@@ -1,3 +1,8 @@
+# shellcheck source=bash-mock/bash-inject.shlib
+source "$(dirname "${BASH_SOURCE[0]}")/bash-mock/bash-inject.shlib"
+
+@inject git
+
 function ps1-root() {
     local ps1_root="\u:$(id -gn)@\h[$(arch)]:\w"
 
