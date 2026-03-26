@@ -1204,7 +1204,7 @@
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
-			<integer>256</integer>
+			<integer>1024</integer>
 			<key>Selected Text Color</key>
 			<dict>
 				<key>Alpha Component</key>
