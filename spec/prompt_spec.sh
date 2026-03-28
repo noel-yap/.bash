@@ -38,12 +38,29 @@ Describe 'prompt.shlib'
       It 'appends the branch name after ᚴ'
         run_ps1_root() {
           mock_first_with_rest git \
-            'echo main'
+            'echo main' \
+            'echo /path/to/parent/myrepo'
           ps1-root
         }
 
         When call in_tempdir run_ps1_root
         The output should include 'ᚴmain'
+      End
+    End
+
+    Context 'when the branch name matches the repo root parent directory name'
+      It 'does not include the git revision separator'
+        run_ps1_root() {
+          mock_first_with_rest git \
+            'echo noel.yap' \
+            'echo /Users/noel.yap/.bash' \
+            'echo a1b2c3d4e5f6a7b8'
+          ps1-root
+        }
+
+        When call in_tempdir run_ps1_root
+        The output should not include 'ᚴ'
+        The output should not include 'noel.yap'
       End
     End
 
